@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tiffin Menu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fffdf7;
+            margin: 0;
+            padding: 30px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+            padding-bottom: 10px;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card h3 {
+            padding: 10px 0 5px;
+            font-size: 20px;
+            color: #444;
+        }
+        .card form {
+            margin-top: 10px;
+        }
+        .card input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        .card button {
+            padding: 6px 12px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍽️ Tiffin Specials</h1>
+
+    <div class="menu-grid">
+        {% for item in [
+            {"name": "Soft Idli", "price": 40, "img": "idli.jpg"},
+            {"name": "Rava Dosa", "price": 55, "img": "dosa.jpg"},
+            {"name": "Masala Dosa", "price": 60, "img": "masaldosa.jpg"},
+            {"name": "Upma", "price": 35, "img": "upma.jpg"},
+            {"name": "Ven Pongal", "price": 45, "img": "pongal.jpg"},
+            {"name": "Semiya Upma", "price": 40, "img": "semiya-upma.jpg"},
+            {"name": "Poori Masala", "price": 50, "img": "poori.jpg"},
+            {"name": "Adai with Avial", "price": 60, "img": "adai-avial.jpg"}
+        ] %}
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/' + item.img) }}" alt="{{ item.name }}">
+            <h3>{{ item.name }} - Rs. {{ item.price }}</h3>
+            <form action="/add_to_cart" method="post">
+                <input type="hidden" name="item_name" value="{{ item.name }}">
+                <input type="hidden" name="price" value="{{ item.price }}">
+                <label for="qty">Qty:</label>
+                <input type="number" name="quantity" value="1" min="1" required>
+                <button type="submit">Add to Cart 🛒</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br><br>
+    <a href="/menu" style="text-decoration:none;">
+        <button style="padding: 10px 20px; font-size: 16px; background-color: #ff6600; color: white; border: none; border-radius: 6px; cursor: pointer;">
+            ⬅️ Back to Menu
+        </button>
+    </a>
+</body>
+</html>

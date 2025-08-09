@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Menu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fff8f0;
+            margin: 0;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-title {
+            padding: 15px;
+            font-size: 22px;
+            color: #222;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🍽️ Restaurant Menu</h1>
+
+    <div class="category-grid">
+        <a href="/menu/starters" class="card">
+            <img src="{{url_for('static',filename='images/starters.jpg')}}" alt="Starters">
+            <div class="card-title">Starters</div>
+        </a>
+        <a href="/menu/tiffin" class="card">
+            <img src="{{url_for('static',filename='images/tiffin.jpg')}}" alt="Tiffin">
+            <div class="card-title">Tiffin</div>
+        </a>
+        <a href="/menu/maincourse" class="card">
+            <img src="{{url_for('static',filename='images/maincourse.jpg')}}" alt="Main Course">
+            <div class="card-title">Main Course</div>
+        </a>
+        <a href="/menu/dessert" class="card">
+            <img src="{{url_for('static',filename='images/dessert.jpg')}}" alt="Desserts">
+            <div class="card-title">Desserts</div>
+        </a>
+    </div>
+
+</body>
+</html>

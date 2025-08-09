@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Orders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Order History</h2>
+
+    <!-- status filter dropdown -->
+    <form method="POST" action="/view_orders" style="margin-bottom:20px;">
+        <label for="status_filter"><strong> Filter by Status: </strong></label>
+        <select name="status_filter" id="status_filter" onchange="this.form.submit()">
+            <option value="All" {% if selected_status == 'All' %} selected {% endif %}>All</option>
+            <option value="Pending" {% if selected_status == 'Pending' %} selected {% endif %}>Pending</option>
+            <option value="Preparing" {% if selected_status == 'Preparing' %} selected {% endif %}>Preparing</option>
+            <option value="Served" {% if selected_status == 'Served' %} selected {% endif %}>Served</option>
+            <option value="Cancelled" {% if selected_status == 'Cancelled' %} selected {% endif %}>Cancelled</option>
+        </select>
+    </form>
+
+    {% if orders %}
+    <table border="1" cellpadding="10" style="margin:auto;">
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Menu Item</th>
+            <th>Quantity</th>
+            <th>Spice Level</th>
+            <th>Sweetness</th>
+            <th>Texture</th>
+            <th>Table No.</th>
+            <th>Order Time</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        {% for order in orders %}
+        <tr>
+            <td>{{ order[0] }}</td>
+            <td>{{ order[1] }}</td>
+            <td>{{ order[2] }}</td>
+            <td>{{ order[3] }}</td>
+            <td>{{ order[4] or '-' }}</td>
+            <td>{{ order[5] or '-' }}</td>
+            <td>{{ order[6] or '-' }}</td>
+            <td>{{ order[7] }}</td>
+            <td>{{ order[8] }}</td>
+            <td>{{ order[9] }}</td>
+            <td>
+                {% if order[8] == "Pending" %}
+                    <form action="/update_status" method="POST" style="display:inline;">
+                        <input type="hidden" name="order_id" value="{{ order[0] }}">
+                        <input type="hidden" name="new_status" value="Preparing">
+                        <button type="submit">Mark Preparing</button>
+                    </form>
+
+                    <form action="/update_status" method="POST" style="display:inline;">
+                        <input type="hidden" name="order_id" value="{{ order[0] }}">
+                        <input type="hidden" name="new_status" value="Cancelled">
+                        <button type="submit">Cancel</button>
+                    </form>
+
+                {% elif order[8] == "Preparing" %}
+                    <form action="/update_status" method="POST" style="display:inline;">
+                        <input type="hidden" name="order_id" value="{{ order[0] }}">
+                        <input type="hidden" name="new_status" value="Served">
+                        <button type="submit">Mark Served</button>
+                    </form>
+
+                {% else %}
+                    {{ order[8] }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No orders placed yet.</p>
+    {% endif %}
+
+    <br><a href="/">Back to Home</a>
+</body>
+</html>

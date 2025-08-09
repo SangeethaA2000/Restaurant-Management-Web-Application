@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Course</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fff8f0;
+            margin: 0;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .dish-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .dish-card:hover {
+            transform: scale(1.05);
+        }
+
+        .dish-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .dish-info {
+            padding: 15px;
+        }
+
+        .dish-info h3 {
+            margin: 10px 0 5px;
+            color: #222;
+        }
+
+        .dish-info p {
+            margin: 0 5px 10px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 6px 12px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e65c00;
+        }
+
+        .back-button {
+            margin-top: 40px;
+        }
+
+        .back-button a {
+            text-decoration: none;
+        }
+
+        .back-button button {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🍛 Main Course</h1>
+
+    <div class="menu-grid">
+        {% for item in [
+            {"name": "Full Meals", "price": 220, "img": "meals.jpg"},
+            {"name": "Bisibelebath", "price": 70, "img": "bisibelebath.jpg"},
+            {"name": "Paneer Butter Masala", "price": 180, "img": "Butter_Paneer.jpg"},
+            {"name": "Dal Tadka", "price": 140, "img": "dal.jpg"},
+            {"name": "Chicken Curry", "price": 210, "img": "chicken.jpg"},
+            {"name": "Veg Biryani", "price": 160, "img": "vegbiriyani.jpg"},
+            {"name": "Mutton Biryani", "price": 240, "img": "Mutton-Biryani.jpg"},
+            {"name": "Palak Khichdi", "price": 120, "img": "palakkichidi.jpg"}
+        ] %}
+        <div class="dish-card">
+            <img src="{{ url_for('static', filename='images/' + item.img) }}" alt="{{ item.name }}">
+            <div class="dish-info">
+                <h3>{{ item.name }}</h3>
+                <p>Rs. {{ item.price }}</p>
+                <form action="/add_to_cart" method="post">
+                    <input type="hidden" name="item_name" value="{{ item.name }}">
+                    <input type="hidden" name="price" value="{{ item.price }}">
+                    <label>Qty:</label>
+                    <input type="number" name="quantity" value="1" min="1" required>
+                    <button type="submit">Add to Cart 🛒</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="back-button">
+        <a href="/menu">
+            <button>⬅️ Back to Menu</button>
+        </a>
+    </div>
+
+</body>
+</html>

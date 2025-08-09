@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Desserts</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f5;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      color: #e91e63;
+      margin-bottom: 30px;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card h3 {
+      margin: 10px 0 5px;
+    }
+    .card p {
+      color: #555;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    form {
+      margin-bottom: 15px;
+    }
+    input[type="number"] {
+      width: 50px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 6px 12px;
+      background-color: #28a745;;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #28a745;;
+    }
+    .back-button {
+      margin-top: 40px;
+    }
+    .back-button a {
+      text-decoration: none;
+    }
+    .back-button button {
+      font-size: 16px;
+      padding: 10px 20px;
+      background-color: #f8a546;
+    }
+    .back-button button:hover {
+      background-color: #f58d39;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍨 Desserts</h1>
+  <div class="menu-grid">
+
+    {% for item in [
+      {"name": "Gulab Jamun", "price": 60, "img": "gulabjamun.jpg"},
+      {"name": "Rasgulla", "price": 50, "img": "rasgulla.jpg"},
+      {"name": "Kheer", "price": 70, "img": "kheer.jpg"},
+      {"name": "Kesar Halwa", "price": 50, "img": "halwa.jpg"}
+    ] %}
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/' + item.img) }}" alt="{{ item.name }}">
+      <h3>{{ item.name }}</h3>
+      <p>Rs. {{ item.price }}</p>
+      <form action="/add_to_cart" method="post">
+        <input type="hidden" name="item_name" value="{{ item.name }}">
+        <input type="hidden" name="price" value="{{ item.price }}">
+        <label>Qty:</label>
+        <input type="number" name="quantity" value="1" min="1" required>
+        <button type="submit">Add to Cart 🛒</button>
+      </form>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <div class="back-button">
+    <a href="/menu">
+      <button>⬅️ Back to Menu</button>
+    </a>
+  </div>
+</body>
+</html>

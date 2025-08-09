@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Starters</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fffaf5;
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      color: #cc5500;
+      margin-bottom: 30px;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      padding-bottom: 15px;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card h3 {
+      margin: 10px 0 5px;
+    }
+    .card p {
+      color: #555;
+      margin-bottom: 10px;
+    }
+    form {
+      margin-top: 10px;
+    }
+    input[type="number"] {
+      width: 50px;
+      padding: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+    .add-btn {
+      background-color: #28a745;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .add-btn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 Starters</h1>
+  <div class="menu-grid">
+
+    <!-- Paneer Tikka -->
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/paneer_tikka.jpg') }}" alt="Paneer Tikka">
+      <h3>Paneer Tikka</h3>
+      <p>Rs. 150</p>
+      <form method="POST" action="/add_to_cart">
+        <input type="hidden" name="item" value="Paneer Tikka">
+        <input type="hidden" name="price" value="150">
+        <label>Qty:</label>
+        <input type="number" name="quantity" value="1" min="1">
+        <button type="submit" class="add-btn">Add to Cart</button>
+      </form>
+    </div>
+
+    <!-- Gobi Manchurian -->
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/gobi_manchurian.jpg') }}" alt="Gobi Manchurian">
+      <h3>Gobi Manchurian</h3>
+      <p>Rs. 130</p>
+      <form method="POST" action="/add_to_cart">
+        <input type="hidden" name="item" value="Gobi Manchurian">
+        <input type="hidden" name="price" value="130">
+        <label>Qty:</label>
+        <input type="number" name="quantity" value="1" min="1">
+        <button type="submit" class="add-btn">Add to Cart</button>
+      </form>
+    </div>
+
+    <!-- Hot & Sour Soup -->
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/soup.jpg') }}" alt="Hot & Sour Soup">
+      <h3>Hot & Sour Soup</h3>
+      <p>Rs. 100</p>
+      <form method="POST" action="/add_to_cart">
+        <input type="hidden" name="item" value="Hot & Sour Soup">
+        <input type="hidden" name="price" value="100">
+        <label>Qty:</label>
+        <input type="number" name="quantity" value="1" min="1">
+        <button type="submit" class="add-btn">Add to Cart</button>
+      </form>
+    </div>
+
+    <!-- Veg Cutlet -->
+    <div class="card">
+      <img src="{{ url_for('static', filename='images/cutlet.jpg') }}" alt="Veg Cutlet">
+      <h3>Veg Cutlet</h3>
+      <p>Rs. 90</p>
+      <form method="POST" action="/add_to_cart">
+        <input type="hidden" name="item" value="Veg Cutlet">
+        <input type="hidden" name="price" value="90">
+        <label>Qty:</label>
+        <input type="number" name="quantity" value="1" min="1">
+        <button type="submit" class="add-btn">Add to Cart</button>
+      </form>
+    </div>
+
+  </div>
+
+  <br><br>
+    <a href="/menu" style="text-decoration:none;">
+    <button style="padding: 10px 20px; font-size: 16px; background-color: #ff6600; color: white; border: none; border-radius: 6px; cursor: pointer;">
+        ⬅️ Back to Menu
+    </button>
+    </a>
+
+</body>
+</html>

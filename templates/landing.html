@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to KAS Restaurant</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif ;
+            background:  oklab(19.834% 0.00947 0.03403 / 0.822);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            padding-top: 30px;
+            font-size: 36px;
+            color: #ece3e3;
+        }
+        .role-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .role-box {
+            width: 250px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .role-box:hover {
+            transform: scale(1.05);
+        }
+        .role-box img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .role-box h3 {
+            margin: 15px 0 10px;
+            color: #444;
+        }
+        .role-box a {
+            display: inline-block;
+            margin: 8px 5px;
+            text-decoration: none;
+            color: white;
+            background: #007BFF;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        .role-box a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Welcome to KAS Restaurant</h1>
+
+<div class="role-container">
+
+    <!-- Owner -->
+    <div class="role-box">
+        <img src="{{url_for('static',filename='images/owner.jpeg')}}" alt="Owner">
+        <h3>Owner</h3>
+        <a href="/login?role=owner">Login</a>
+        <a href="/register?role=owner">Register</a>
+    </div>
+
+    <!-- Chef -->
+    <div class="role-box">
+        <img src="{{url_for('static',filename='images/chef.jpg')}}" alt="Chef">
+        <h3>Chef</h3>
+        <a href="/login?role=chef">Login</a>
+        <a href="/register?role=chef">Register</a>
+    </div>
+
+    <!-- Customer -->
+    <div class="role-box">
+        <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="Customer">
+        <h3>Customer</h3>
+        <a href="/login?role=customer">Login</a>
+        <a href="/register?role=customer">Register</a>
+    </div>
+
+</div>
+
+</body>
+</html>

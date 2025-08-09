@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> Tables Availability </title>
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    </head>
+    <body>
+        <h2> Table Availability </h2>
+        <table border="1" cellpadding="10" style="margin:auto;">
+            <tr>
+                <th> Table No. </th>
+                <th> Status </th>
+            </tr>
+
+            {% for table in tables %}
+            <tr>
+                <td> {{table[0]}} </td>
+                <td> {{'Available' if table[1] else 'Occupied'}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

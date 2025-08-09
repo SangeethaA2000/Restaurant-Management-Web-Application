@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Place Order </title>
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+
+    </head>
+    <body>
+        <h2> Place New Order </h2>
+        <form method="POST">
+            
+            <label for="customer">Select Customer:</label>
+            
+            <select name="customer_id" required>
+                <option value=""> -- select -- </option>
+                {% for c in customers %}
+                <option value="{{c[0]}}">{{c[1]}}</option>"
+                {% endfor %}
+
+            </select>
+            
+            <br><br>
+            
+            <label for="table"> Select Table: </label>
+            
+            <select name="table_id" required>
+                <option value=""> -- Select --</option>
+                {% for t in tables %}
+                <option value="{{t[0]}}">Table {{t[0]}} ({{t[1]}} seats )</option>
+                   {% endfor %}
+
+            </select>
+            <br> <br>
+
+            <label for="item"> Select Menu Item: </label>
+            <select name="item_id" required>
+                <option value="">-- Select --</option>
+                {% for i in items %}
+                <option value="{{i[0]}}"> {{i[1]}} </option>"
+                {% endfor %}
+
+            </select>
+            <br> <br>
+
+            <label> Quantity: </label>
+            <input type="number" name="quantity" min="1" required>
+            <br> <br>
+
+            <label> Spice Level: </label>
+            <input tpe="text" name="spice_level">
+            <br> <br>
+
+            <label> Sweetness: </label>
+            <input tpe="text" name="sweetness">
+            <br> <br>
+
+            <label> Texture:</label>
+            <input tpe="text" name="texture">
+            <br> <br>
+
+            <button type="submit"> Place Order </button>
+
+        </form>
+
+        <br> <a href="/"> Back to Home </a>
+
+
+    </body>
+</html>

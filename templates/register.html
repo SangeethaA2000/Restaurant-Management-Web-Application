@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - KAS Restaurant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            text-align: center;
+            padding-top: 40px;
+        }
+        form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select {
+            padding: 10px;
+            margin: 10px;
+            width: 250px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Register as <span id="roleDisplay">User</span></h2>
+
+<form method="POST">
+    <input type="text" name="username" placeholder="Username" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    
+    <input type="hidden" name="role" id="roleInput" value="customer">
+    
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    // Extract role from query params
+    const params = new URLSearchParams(window.location.search);
+    const role = params.get('role') || 'customer';
+
+    // Set role value in hidden input
+    document.getElementById('roleInput').value = role;
+
+    // Show role name to user
+    document.getElementById('roleDisplay').innerText = role.charAt(0).toUpperCase() + role.slice(1);
+</script>
+
+</body>
+</html>

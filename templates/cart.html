@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff8f0;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 80%;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px 20px;
+      border-bottom: 1px solid #ddd;
+      font-size: 18px;
+    }
+    th {
+      background-color: #f9c2c2;
+      color: #333;
+    }
+    tfoot td {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .buttons a {
+      margin: 20px 10px;
+      display: inline-block;
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛒 Your Cart</h1>
+
+  {% if cart %}
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price (₹)</th>
+          <th>Qty</th>
+          <th>Subtotal (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set total = 0 %}
+        {% for dish in cart %}
+          <tr>
+            <td>{{ dish.item }}</td>
+            <td>{{ dish.price }}</td>
+            <td>{{ dish.quantity }}</td>
+            <td>{{ dish.price * dish.quantity }}</td>
+            {% set total = total + (dish.price * dish.quantity) %}
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Total</td>
+          <td>₹{{ total }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  {% else %}
+    <p>Your cart is empty.</p>
+  {% endif %}
+
+  <div class="buttons">
+    <a href="{{ url_for('show_menu') }}">⬅️ Back to Menu</a>
+    <a href="{{ url_for('clear_cart') }}">🗑️ Clear Cart</a>
+  </div>
+</body>
+</html>
